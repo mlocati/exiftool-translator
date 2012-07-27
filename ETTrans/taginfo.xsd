@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema
+	targetNamespace="http://tempuri.org/XMLSchema.xsd"
+	elementFormDefault="qualified"
+	xmlns="http://tempuri.org/XMLSchema.xsd"
+	xmlns:mstns="http://tempuri.org/XMLSchema.xsd"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+>
+	<xs:element name="taginfo" type="taginfoType" />
+
+	<xs:complexType name="taginfoType">
+		<xs:sequence minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="table" type="tableType"></xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="tableType">
+		<xs:sequence>
+			<xs:element name="desc" type="descType" minOccurs="0" maxOccurs="unbounded" />
+			<xs:element name="tag" type="tagType" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+		<xs:attribute name="name" type="xs:string" use="required" />
+		<xs:attribute name="g0" type="xs:string" use="required" />
+		<xs:attribute name="g1" type="xs:string" use="required" />
+		<xs:attribute name="g2" type="xs:string" use="required" />
+	</xs:complexType>
+
+	<xs:complexType name="descType">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="lang" type="xs:string" use="required" />
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<xs:complexType name="tagType">
+		<xs:sequence minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="desc" type="descType" minOccurs="0" maxOccurs="unbounded" />
+			<xs:element name="values" type="valuesType" minOccurs="0" maxOccurs="1" />
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:string" use="required" />
+		<xs:attribute name="name" type="xs:string" use="required" />
+		<xs:attribute name="index" type="xs:int" use="optional" />
+		<xs:attribute name="type" type="xs:string" use="required" />
+		<xs:attribute name="count" type="xs:int" use="optional" />
+		<xs:attribute name="writable" type="xs:boolean" use="required" />
+		<xs:attribute name="g0" type="xs:string" use="optional" />
+		<xs:attribute name="g1" type="xs:string" use="optional" />
+		<xs:attribute name="g2" type="xs:string" use="optional" />
+	</xs:complexType>
+
+	<xs:complexType name="valuesType">
+		<xs:sequence>
+			<xs:element name="key" type="keyType" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+		<xs:attribute name="index" type="xs:int" use="optional" />
+	</xs:complexType>
+
+	<xs:complexType name="keyType">
+		<xs:sequence>
+			<xs:element name="val" type="valType" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:string" use="required" />
+	</xs:complexType>
+
+	<xs:complexType name="valType">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="lang" type="xs:string" use="required" />
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+</xs:schema>
