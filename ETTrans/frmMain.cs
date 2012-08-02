@@ -11,6 +11,11 @@ namespace ETTrans
 {
 	public partial class frmMain : Form
 	{
+		private enum UnloadReson
+		{
+			Quitting,
+			OpeningOther,
+		}
 		private readonly string InitialFile;
 		private TagInfoUI _currentTagInfo = null;
 
@@ -327,6 +332,10 @@ namespace ETTrans
 
 		private void mniOpen_Click(object sender, EventArgs e)
 		{
+			if (!CheckUnloadableCurrent(UnloadReson.OpeningOther))
+			{
+				return;
+			}
 			try
 			{
 				using (OpenFileDialog ofd = new OpenFileDialog())
@@ -497,29 +506,52 @@ namespace ETTrans
 
 		private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
 		{
+			if (!this.CheckUnloadableCurrent(UnloadReson.Quitting))
+			{
+				e.Cancel = true;
+			}
+		}
+
+		private bool CheckUnloadableCurrent(UnloadReson reason)
+		{
 			if (this.Dirty)
 			{
-				switch (MessageBox.Show(string.Format("The file is not saved.{0}{0}Save it before exiting?", Environment.NewLine), Application.ProductName, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1))
+				string text;
+				switch (reason)
+				{
+					case UnloadReson.Quitting:
+						text = string.Format("The file is not saved.{0}{0}Save it before exiting?", Environment.NewLine);
+						break;
+					case UnloadReson.OpeningOther:
+						text = string.Format("The file is not saved.{0}{0}Save it before opening another one?", Environment.NewLine);
+						break;
+					default:
+						text = string.Format("The file is not saved.{0}{0}Save it before continuing?", Environment.NewLine);
+						break;
+				}
+				switch (MessageBox.Show(text, Application.ProductName, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1))
 				{
 					case DialogResult.Yes:
 						try
 						{
 							this.CurrentTagInfo.Save();
 							this.Dirty = false;
+							return true;
 						}
 						catch (Exception x)
 						{
 							MessageBox.Show(x.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
-							e.Cancel = true;
+							return false;
 						}
-						break;
 					case DialogResult.No:
-						break;
+						return true;
 					default:
-						e.Cancel = true;
-						break;
+						return false;
 				}
-
+			}
+			else
+			{
+				return true;
 			}
 		}
 
