@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace ETTrans
 {
-	public partial class frmValues : Form
+	public partial class frmValues : Form, frmOptions.IConfigApply
 	{
 		public frmValues(TagTranslateItem tagItem)
 		{
@@ -17,6 +17,12 @@ namespace ETTrans
 			this.lblInfo.Text = tagItem.ID;
 			this.dgvValues.AutoGenerateColumns = false;
 			this.dgvValues.DataSource = tagItem.GetTranslateValues();
+			try
+			{
+				this.ApplyConfig();
+			}
+			catch
+			{ }
 		}
 
 		private void btnClose_Click(object sender, EventArgs e)
@@ -36,5 +42,12 @@ namespace ETTrans
 			catch
 			{ }
 		}
+
+
+		public void ApplyConfig()
+		{
+			this.dgvValues.Font = new System.Drawing.Font(Config.GridFontName, Config.GridFontSize);
+		}
+
 	}
 }

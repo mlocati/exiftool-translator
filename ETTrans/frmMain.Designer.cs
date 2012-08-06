@@ -52,6 +52,8 @@
 			  this.mniOpen = new System.Windows.Forms.ToolStripMenuItem();
 			  this.mniSave = new System.Windows.Forms.ToolStripMenuItem();
 			  this.mniSaveAs = new System.Windows.Forms.ToolStripMenuItem();
+			  this.mnuTools = new System.Windows.Forms.ToolStripMenuItem();
+			  this.mniOptions = new System.Windows.Forms.ToolStripMenuItem();
 			  ((System.ComponentModel.ISupportInitialize)(this.dgvTrans)).BeginInit();
 			  this.gbxFilter.SuspendLayout();
 			  this.mnuMain.SuspendLayout();
@@ -252,7 +254,8 @@
 			  // mnuMain
 			  // 
 			  this.mnuMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuFile});
+            this.mnuFile,
+            this.mnuTools});
 			  this.mnuMain.Location = new System.Drawing.Point(0, 0);
 			  this.mnuMain.Name = "mnuMain";
 			  this.mnuMain.Size = new System.Drawing.Size(760, 24);
@@ -269,6 +272,7 @@
 			  this.mnuFile.Name = "mnuFile";
 			  this.mnuFile.Size = new System.Drawing.Size(37, 20);
 			  this.mnuFile.Text = "&File";
+			  this.mnuFile.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay;
 			  // 
 			  // mniNew
 			  // 
@@ -306,6 +310,24 @@
 			  this.mniSaveAs.Size = new System.Drawing.Size(222, 22);
 			  this.mniSaveAs.Text = "Save &as...";
 			  this.mniSaveAs.Click += new System.EventHandler(this.mniSaveAs_Click);
+			  // 
+			  // mnuTools
+			  // 
+			  this.mnuTools.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+			  this.mnuTools.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mniOptions});
+			  this.mnuTools.Name = "mnuTools";
+			  this.mnuTools.Size = new System.Drawing.Size(48, 20);
+			  this.mnuTools.Text = "&Tools";
+			  this.mnuTools.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay;
+			  // 
+			  // mniOptions
+			  // 
+			  this.mniOptions.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+			  this.mniOptions.Name = "mniOptions";
+			  this.mniOptions.Size = new System.Drawing.Size(152, 22);
+			  this.mniOptions.Text = "&Options";
+			  this.mniOptions.Click += new System.EventHandler(this.mniOptions_Click);
 			  // 
 			  // frmMain
 			  // 
@@ -356,6 +378,8 @@
 		 private System.Windows.Forms.DataGridViewTextBoxColumn colTrans;
 		 private System.Windows.Forms.DataGridViewLinkColumn colValues;
 		 private System.Windows.Forms.CheckBox chkFilterInlinevalues;
+		 private System.Windows.Forms.ToolStripMenuItem mnuTools;
+		 private System.Windows.Forms.ToolStripMenuItem mniOptions;
     }
 }
 

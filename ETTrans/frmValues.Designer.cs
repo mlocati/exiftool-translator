@@ -44,7 +44,7 @@
 			this.lblInfo.Name = "lblInfo";
 			this.lblInfo.Size = new System.Drawing.Size(35, 13);
 			this.lblInfo.TabIndex = 0;
-			this.lblInfo.Text = "label1";
+			this.lblInfo.Text = "lblInfo";
 			// 
 			// dgvValues
 			// 

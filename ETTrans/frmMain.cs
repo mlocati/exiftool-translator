@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace ETTrans
 {
-	public partial class frmMain : Form
+	public partial class frmMain : Form, frmOptions.IConfigApply
 	{
 		private enum UnloadReson
 		{
@@ -135,6 +135,12 @@ namespace ETTrans
 			this.dgvTrans.AutoGenerateColumns = false;
 			this.CurrentTagInfo = null;
 			this.InitialFile = initialFile;
+			try
+			{
+				this.ApplyConfig();
+			}
+			catch
+			{ }
 		}
 		private void frmMain_Shown(object sender, EventArgs e)
 		{
@@ -566,6 +572,19 @@ namespace ETTrans
 			}
 			catch
 			{ }
+		}
+
+		private void mniOptions_Click(object sender, EventArgs e)
+		{
+			using (frmOptions frm = new frmOptions())
+			{
+				frm.ShowDialog(this);
+			}
+		}
+
+		public void ApplyConfig()
+		{
+			this.dgvTrans.Font = new System.Drawing.Font(Config.GridFontName, Config.GridFontSize);
 		}
 
 	}
